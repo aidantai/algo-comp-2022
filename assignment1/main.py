@@ -17,7 +17,24 @@ class User:
 # Takes in two user objects and outputs a float denoting compatibility
 def compute_score(user1, user2):
     # YOUR CODE HERE
-    return 0
+
+    # check if preferences match
+    pscore = 0
+    if user1.gender in user2.preferences and user2.gender in user1.preferences:
+        pscore = 1
+
+    # check age gap
+    ydiff = abs(user1.grad_year - user2.grad_year)
+    yscore = 1 - 0.5*ydiff
+
+    # match responses
+    rscore = 0
+    for i in range(len(user1.responses)):
+        if user1.responses[i] == user2.responses[i]:
+            rscore += 1
+    rscore /= len(user1.responses)
+
+    return min(0, pscore*(0.5*yscore + 0.5*rscore))
 
 
 if __name__ == '__main__':
