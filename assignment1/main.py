@@ -34,7 +34,7 @@ def compute_score(user1, user2):
             rscore += 1
     rscore /= len(user1.responses)
 
-    return min(0, pscore*(0.5*yscore + 0.5*rscore))
+    return max(0, pscore*(0.5*yscore + 0.5*rscore))
 
 
 if __name__ == '__main__':
